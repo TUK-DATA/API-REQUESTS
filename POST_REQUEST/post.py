@@ -3,7 +3,7 @@ import random
 from time import sleep
 
 
-
+post_url = "https://tukdata.herokuapp.com/data"
 
 def generate_temperature():
     temperature = random.randrange(21,30,1)
@@ -16,7 +16,7 @@ def generate_humidity():
 def estimate_airQuality():
     temp = generate_temperature()
     humidity = generate_humidity()
-    if(temp > 60 and humidity < 40):
+    if(humidity < 40):
         airQuality = "Harsh"
     else:
         airQuality = "Fair"
@@ -34,13 +34,14 @@ def post(url,json_data):
 
 
 
+
+
 while(True):
     post_data = {
     "temperature":generate_temperature(),
     "humidity":generate_humidity(),
     "airQuality":estimate_airQuality()
 }
-    
     response,data = post(post_url,post_data)
     print(response)
     print(data)
